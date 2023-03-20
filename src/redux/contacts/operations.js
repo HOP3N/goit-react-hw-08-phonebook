@@ -6,9 +6,9 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
-      try {
-      const response = await axios.get('/contacts');
-          return response.data;
+    try {
+      const res = await axios.get('/contacts');
+      return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -18,11 +18,11 @@ export const fetchContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
-      try {
-          const response = await axios.post('/contacts', contact);
-      return response.data;
-      } catch (e) {
-          console.log("blad: ", e.message);
+    try {
+      const res = await axios.post('/contacts', contact);
+      return res.data;
+    } catch (e) {
+      console.log('error: ', e.message);
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -32,8 +32,8 @@ export const delContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/contacts/${contactId}`);
-      return response.data;
+      const res = await axios.delete(`/contacts/${contactId}`);
+      return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -44,10 +44,10 @@ export const toggleCompleted = createAsyncThunk(
   'contacts/toggleCompleted',
   async (contact, thunkAPI) => {
     try {
-      const response = await axios.put(`/contacts/${contact.id}`, {
+      const res = await axios.put(`/contacts/${contact.id}`, {
         completed: !contact.completed,
       });
-      return response.data;
+      return res.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
